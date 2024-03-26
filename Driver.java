@@ -1,17 +1,17 @@
-import java.util.List;
 import java.util.*;
-public class Driver{
-int Time = 0;
-static List<PCB> q1 = new ArrayList<>();
-static List<PCB> q2= new ArrayList<>();
-static List<PCB> allProcesses= new ArrayList<>();
 
-public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
+public class Driver {
+    int Time = 0;
+    static List<PCB> q1 = new ArrayList<>();
+    static List<PCB> q2 = new ArrayList<>();
+    static List<PCB> allProcesses = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
         boolean exit = false;
 
         while (!exit) {
-      
+
             System.out.println("1- Enter process information");
             System.out.println("2 -Report detailed information about each process and different scheduling criteria");
             System.out.println("3 -Exit program");
@@ -21,24 +21,27 @@ public static void main(String[] args) {
 
             switch (choice) {
                 case 1:
-                System.out.print("Enter the number of processes: ");
-                int num = input.nextInt();
+                    System.out.print("Enter the number of processes: ");
+                    int num = input.nextInt();
+
+                    for (int i = 1; i <= num; i++) {
+                        System.out.println("process " + i + ":");
+                        System.out.print("priority 1 or 2: ");
+                        int priority = input.nextInt();
+                        System.out.print("arrival Time: ");
+                        int arrivalTime = input.nextInt();
+                        System.out.print("CPU burst: ");
+                        int cpuBurst = input.nextInt();
+                        PCB p = new PCB(i, priority, arrivalTime, cpuBurst);
+                        allProcesses.add(p);
+                    }
+
+                    Collections.sort(allProcesses);// sort the array based on arival time 
         
-                for (int i = 1; i <= num; i++) {
-                    System.out.println("process " + i + ":");
-                    System.out.print("priority 1 or 2: ");
-                    int priority = input.nextInt();
-                    System.out.print("arrival Time: ");
-                    int arrivalTime = input.nextInt();
-                    System.out.print("CPU burst: ");
-                    int cpuBurst = input.nextInt();
-                    PCB p = new PCB(i, priority, arrivalTime, cpuBurst);
-                    allProcesses.add(p);
-                }
                     break;
-              
+
                 case 2:
-                   // reportInfo();
+                    // reportInfo();
                     break;
                 case 3:
                     exit = true;
@@ -47,25 +50,32 @@ public static void main(String[] args) {
                 default:
                     System.out.println("invalid choice");
             }
-        
-        
+
         }
-
-
 
     }
 
+    static void addProcesses(int time) {
 
+        for (int i = 0; i < allProcesses.size(); i++) {
+            if (allProcesses.get(0).getArrivalTime() == time) {
+                if (allProcesses.get(0).getPriority() == 1)
+                    q1.add(allProcesses.remove(0));
 
+                else
+                    q2.add(allProcesses.remove(0));
 
+            }
 
+            else
+                break;
 
+        }
 
-public static void scheduleProcess(){
-    
+    }
+
+    public static void scheduleProcess() {
+
+    }
+
 }
-
-
-
-}
-    

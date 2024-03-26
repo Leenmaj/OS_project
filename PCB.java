@@ -1,4 +1,4 @@
-public class PCB {
+public class PCB implements Comparable<PCB> {
     private int processId;
     private int priority;
     private int arrivalTime;
@@ -9,14 +9,12 @@ public class PCB {
     private int waitingTime;
     private int responseTime;
 
-   
     public PCB(int processId, int priority, int arrivalTime, int burstTime) {
         this.processId = processId;
         this.priority = priority;
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
 
-       
         this.startTime = -1;
         this.terminationTime = -1;
         this.turnaroundTime = -1;
@@ -96,5 +94,20 @@ public class PCB {
     public void setResponseTime(int responseTime) {
         this.responseTime = responseTime;
     }
-}
 
+    @Override
+    public int compareTo(PCB o) {
+        return Integer.compare(this.arrivalTime, o.arrivalTime);
+    }
+
+    @Override
+    public String toString() {
+        return "PCB{" +
+                "processId=" + processId +
+                ", priority=" + priority +
+                ", arrivalTime=" + arrivalTime +
+    
+                '}';
+    }
+
+}
