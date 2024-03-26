@@ -106,6 +106,12 @@ public class PCB implements Comparable<PCB> {
                 "processId=" + processId +
                 ", priority=" + priority +
                 ", arrivalTime=" + arrivalTime +
+                ", burstTime=" + burstTime +
+                ", startTime=" + startTime +
+                ", terminationTime=" + terminationTime +
+                ", turnaroundTime=" + turnaroundTime +
+                ", waitingTime=" + waitingTime +
+                ", responseTime=" + responseTime +
     
                 '}';
     }
