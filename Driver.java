@@ -4,6 +4,7 @@ public class Driver{
 int Time = 0;
 static List<PCB> q1 = new ArrayList<>();
 static List<PCB> q2= new ArrayList<>();
+static List<PCB> allProcesses= new ArrayList<>();
 
 public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
@@ -32,7 +33,7 @@ public static void main(String[] args) {
                     System.out.print("CPU burst: ");
                     int cpuBurst = input.nextInt();
                     PCB p = new PCB(i, priority, arrivalTime, cpuBurst);
-                  addProcess(p);
+                    allProcesses.add(p);
                 }
                     break;
               
@@ -57,14 +58,13 @@ public static void main(String[] args) {
 
 
 
-public static void addProcess(PCB proc){
 
-if (proc.getPriority() ==1)
-q1.add(proc);
-else
-q2.add(proc);
 
+
+public static void scheduleProcess(){
+    
 }
+
 
 
 }
