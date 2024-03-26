@@ -1,5 +1,5 @@
 import java.util.List;
-
+import java.util.*;
 public class Driver{
 int Time = 0;
 static List<PCB> q1 = new ArrayList<>();
@@ -32,13 +32,12 @@ public static void main(String[] args) {
                     System.out.print("CPU burst: ");
                     int cpuBurst = input.nextInt();
                     PCB p = new PCB(i, priority, arrivalTime, cpuBurst);
-                    if(addProcess(p))
-                    System.out.println("process added");}
-                     //print statement just to check
+                  addProcess(p);
+                }
                     break;
               
                 case 2:
-                    reportInfo();
+                   // reportInfo();
                     break;
                 case 3:
                     exit = true;
@@ -58,15 +57,15 @@ public static void main(String[] args) {
 
 
 
-public static boolean addProcess(PCB proc){
+public static void addProcess(PCB proc){
 
 if (proc.getPriority() ==1)
 q1.add(proc);
 else
 q2.add(proc);
+
 }
 
-   
-}
 
+}
     
