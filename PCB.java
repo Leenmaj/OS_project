@@ -1,5 +1,5 @@
 public class PCB implements Comparable<PCB> {
-    private int processId;
+    private String processId;
     private int priority;
     private int arrivalTime;
     private int burstTime;
@@ -8,8 +8,9 @@ public class PCB implements Comparable<PCB> {
     private int turnaroundTime;
     private int waitingTime;
     private int responseTime;
+    private boolean isNew;
 
-    public PCB(int processId, int priority, int arrivalTime, int burstTime) {
+    public PCB(String processId, int priority, int arrivalTime, int burstTime) {
         this.processId = processId;
         this.priority = priority;
         this.arrivalTime = arrivalTime;
@@ -20,14 +21,15 @@ public class PCB implements Comparable<PCB> {
         this.turnaroundTime = -1;
         this.waitingTime = -1;
         this.responseTime = -1;
+        isNew = true;
     }
 
     // getters and setters
-    public int getProcessId() {
+    public String getProcessId() {
         return processId;
     }
 
-    public void setProcessId(int processId) {
+    public void setProcessId(String processId) {
         this.processId = processId;
     }
 
@@ -105,15 +107,25 @@ public class PCB implements Comparable<PCB> {
         return "PCB{" +
                 "processId=" + processId +
                 ", priority=" + priority +
-                ", arrivalTime=" + arrivalTime +
-                ", burstTime=" + burstTime +
-                ", startTime=" + startTime +
-                ", terminationTime=" + terminationTime +
-                ", turnaroundTime=" + turnaroundTime +
-                ", waitingTime=" + waitingTime +
-                ", responseTime=" + responseTime +
-    
+                /*
+                 * ", arrivalTime=" + arrivalTime +
+                 * ", burstTime=" + burstTime +
+                 * ", startTime=" + startTime +
+                 * ", terminationTime=" + terminationTime +
+                 * ", turnaroundTime=" + turnaroundTime +
+                 * ", waitingTime=" + waitingTime +
+                 * ", responseTime=" + responseTime +
+                 */
+
                 '}';
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean isNew) {
+        this.isNew = isNew;
     }
 
 }

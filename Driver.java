@@ -32,12 +32,12 @@ public class Driver {
                         int arrivalTime = input.nextInt();
                         System.out.print("CPU burst: ");
                         int cpuBurst = input.nextInt();
-                        PCB p = new PCB(i, priority, arrivalTime, cpuBurst);
+                        PCB p = new PCB("P" + i, priority, arrivalTime, cpuBurst);
                         allProcesses.add(p);
                     }
 
-                    Collections.sort(allProcesses);// sort the array based on arival time 
-        
+                    Collections.sort(allProcesses);// sort the array based on arival time
+                    System.out.println(scheduleProcess()); // temporary
                     break;
 
                 case 2:
@@ -74,7 +74,39 @@ public class Driver {
 
     }
 
-    public static void scheduleProcess() {
+    public static String scheduleProcess() {
+        String schedule = "";
+
+        int time = 0;
+        addProcesses(time);
+        while (!allProcesses.isEmpty() || !q1.isEmpty() || !q2.isEmpty()) {
+
+            while (!q1.isEmpty()) {
+
+                PCB process = q1.remove(0);
+                if (process.isNew())
+                    process.setResponseTime(time - process.getArrivalTime());
+
+                schedule = schedule + "| " + process.getProcessId();
+
+                int burstTime = process.getBurstTime();
+                int i;
+
+                for (i = 0; i < 3 && i < burstTime; i++) {
+                    time++;
+                    process.setBurstTime(process.getBurstTime() - 1);
+                    addProcesses(time);
+                }
+
+                if (i == 3 && (process.getBurstTime() != 0)) {
+                    q1.add(process);
+                }
+
+            }
+
+        }
+
+        return schedule;
 
     }
 
