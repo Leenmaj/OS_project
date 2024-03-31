@@ -78,23 +78,28 @@ public class Driver {
         String schedule = "";
 
         int time = 0;
+
+        // outer loop for multilevel queue
         while (!allProcesses.isEmpty() || !q1.isEmpty() || !q2.isEmpty()) {
             addProcesses(time);
+
+            // Round robin
             while (!q1.isEmpty()) {
 
                 PCB process = q1.remove(0);
-                if (process.isNew())
+                if (process.isNew()) {
                     process.setResponseTime(time - process.getArrivalTime());
 
-                    process.setNew(false);
+                }
+
+                process.setNew(false);
 
                 schedule = schedule + "| " + process.getProcessId();
 
                 int burstTime = process.getBurstTime();
                 int i;
 
-                 
-
+                // terminate when i = TQ or the process is terminated(burst time = 0)
                 for (i = 0; i < 3 && i < burstTime; i++) {
                     time++;
                     process.setBurstTime(process.getBurstTime() - 1);
@@ -105,11 +110,20 @@ public class Driver {
                     q1.add(process);
                 }
 
-
-                // we can add and else here to caluclate turn around time( the process is complete )
-                
+                /*
+                 * we can add and else here to caluclate turn around time( the process is
+                 * complete )
+                 * 
+                 * else {
+                 * 
+                 * write in here the turn around time and wating time calculations
+                 * }
+                 * 
+                 */
 
             }
+
+            // add q2 scheduling algorithm here
 
             time++;
 
