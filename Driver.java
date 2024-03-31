@@ -104,6 +104,8 @@ public class Driver {
 
             }
 
+            time++;
+
         }
 
         return schedule;
