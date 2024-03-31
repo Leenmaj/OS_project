@@ -78,9 +78,8 @@ public class Driver {
         String schedule = "";
 
         int time = 0;
-        addProcesses(time);
         while (!allProcesses.isEmpty() || !q1.isEmpty() || !q2.isEmpty()) {
-
+            addProcesses(time);
             while (!q1.isEmpty()) {
 
                 PCB process = q1.remove(0);
