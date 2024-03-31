@@ -100,10 +100,14 @@ public class Driver {
                     process.setBurstTime(process.getBurstTime() - 1);
                     addProcesses(time);
                 }
-
+                // add non completed processes to the queue again
                 if (i == 3 && (process.getBurstTime() != 0)) {
                     q1.add(process);
                 }
+
+
+                // we can add and else here to caluclate turn around time( the process is complete )
+                
 
             }
 
