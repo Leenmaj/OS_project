@@ -86,10 +86,14 @@ public class Driver {
                 if (process.isNew())
                     process.setResponseTime(time - process.getArrivalTime());
 
+                    process.setNew(false);
+
                 schedule = schedule + "| " + process.getProcessId();
 
                 int burstTime = process.getBurstTime();
                 int i;
+
+                 
 
                 for (i = 0; i < 3 && i < burstTime; i++) {
                     time++;
