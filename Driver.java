@@ -124,7 +124,79 @@ public class Driver {
             }
 
             // add q2 scheduling algorithm here
+               while (!q2.isEmpty() && q1.isEmpty()) {
 
+    // Bubble sort on q2 based on burst time of previously sorted arival time processes ^ .
+    // sort is stable in case 2 equal burst time appears (first arrived scheudled first)
+    // && case were 2 equal burst time and equal arival time (first intered by user is choosen)
+    for (int i = 0; i < q2.size() - 1; i++) {
+        for (int j = 0; j < q2.size() - i - 1; j++) {
+            if (q2.get(j).getBurstTime() > q2.get(j + 1).getBurstTime()) {
+                PCB temp = q2.get(j);
+                q2.set(j, q2.get(j + 1));
+                q2.set(j + 1, temp);
+            }
+        }
+    }
+
+// in case process was preemted by MLQ due to q1 higher priorty we save actual RT by marking a flag for new processes and reallocated ones
+    PCB process = q2.remove(0);
+      if (process.isNew()) {
+                    process.setResponseTime(time - process.getArrivalTime());
+
+                }
+
+                process.setNew(false);
+      
+
+
+
+    schedule = schedule + "| " + process.getProcessId();
+
+
+// same in here we save actual BT to reset it later
+    int burstTime = process.getBurstTime();
+
+  
+    
+    // Execute the process for its burst time
+
+    for (int i = 0; i < burstTime; i++) {
+    
+    // check if q1 is empty due to its higher priorty
+            if (!q1.isEmpty()) {
+               if (process.getBurstTime()!=0)
+                   q2.add(process);
+        break;
+    }
+        time++;
+
+        process.setBurstTime(process.getBurstTime() - 1); 
+
+        addProcesses(time);
+
+    }
+
+
+
+    // Update the termination time for the process
+
+    process.setTerminationTime(time);
+
+
+
+    // Calculate the waiting time for the process
+    process.setBurstTime(burstTime);
+
+    process.setWaitingTime(process.getTerminationTime() - process.getArrivalTime() - process.getBurstTime());
+
+
+
+    // Calculate the turnaround time for the process
+
+    process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
+
+}
             time++;
 
         }
