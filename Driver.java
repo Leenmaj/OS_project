@@ -197,7 +197,7 @@ public class Driver {
     process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
 
 }
-            time++;
+            //time++;
 
         }
 
