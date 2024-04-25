@@ -109,7 +109,9 @@ public class Driver {
                 if (i == 3 && (process.getBurstTime() != 0)) {
                     q1.add(process);
                 }
-
+                process.setTerminationTime(time);
+                process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
+                process.setWaitingTime(process.getTurnaroundTime() - process.getBurstTime());
                 /*
                  * we can add and else here to caluclate turn around time( the process is
                  * complete )
