@@ -55,10 +55,11 @@ public class Driver {
 
     }
 
-    static void addProcesses(int time) {
-
+    static boolean addProcesses(int time) {
+        boolean processAdded = false;
         for (int i = 0; i < allProcesses.size(); i++) {
             if (allProcesses.get(0).getArrivalTime() == time) {
+                processAdded = true;
                 if (allProcesses.get(0).getPriority() == 1)
                     q1.add(allProcesses.remove(0));
 
@@ -71,6 +72,7 @@ public class Driver {
                 break;
 
         }
+         return processAdded;
 
     }
 
@@ -81,8 +83,13 @@ public class Driver {
 
         // outer loop for multilevel queue
         while (!allProcesses.isEmpty() || !q1.isEmpty() || !q2.isEmpty()) {
-            addProcesses(time);
-
+            boolean added = addProcesses(time);
+   
+            //if no processes are added and both queues are empty increment time
+   if (!added && q1.isEmpty() && q2.isEmpty()) {
+    time++;  // time increments  when no processes can be scheduled
+    continue;  // skip the rest of the loop
+}
             // Round robin
             while (!q1.isEmpty()) {
 
