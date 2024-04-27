@@ -38,7 +38,7 @@ public class Driver {
                         System.out.print("priority 1 or 2: ");
                         int priority = input.nextInt();
                         while (priority != 1 && priority != 2) {
-                            System.out.println("Invaild priority! plesase enter 1 or 2 ");
+                            System.out.println("Invaild priority! please enter 1 or 2 ");
                             System.out.print("priority 1 or 2: ");
                             priority = input.nextInt();
 
