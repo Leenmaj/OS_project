@@ -211,7 +211,7 @@ public class Driver {
                 process.setTerminationTime(time);
 
                 // Calculate the waiting time for the process
-                process.setBurstTime(burstTime);
+                // process.setBurstTime(burstTime);
 
                 process.setWaitingTime(
                         process.getTerminationTime() - process.getArrivalTime() - process.getCpuBurst());
