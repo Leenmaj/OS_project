@@ -104,20 +104,16 @@ public class PCB implements Comparable<PCB> {
 
     @Override
     public String toString() {
-        return "PCB{" +
-                "processId=" + processId +
-                ", priority=" + priority +
-                /*
-                 * ", arrivalTime=" + arrivalTime +
-                 * ", burstTime=" + burstTime +
-                 * ", startTime=" + startTime +
-                 * ", terminationTime=" + terminationTime +
-                 * ", turnaroundTime=" + turnaroundTime +
-                 * ", waitingTime=" + waitingTime +
-                 * ", responseTime=" + responseTime +
-                 */
+        return "Process ID:" + processId + "\n" +
+                "Priority:" + priority + "\n" +
+                "Arrival Time:" + arrivalTime + "\n" +
+                "CPU burst:" + burstTime + "\n" +
+                "Start Time:" + startTime + "\n" +
+                "Termination Time:" + terminationTime + "\n" +
+                "Turnaround Time:" + turnaroundTime + "\n" +
+                "Waiting Time:" + waitingTime + "\n" +
+                "Response Time:" + responseTime;
 
-                '}';
     }
 
     public boolean isNew() {
