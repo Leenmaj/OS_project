@@ -104,12 +104,15 @@ public class Driver {
 
             // if no processes are added and both queues are empty increment time
             if (!added && q1.isEmpty() && q2.isEmpty()) {
+
                 time++; // time increments when no processes can be scheduled
+                System.out.println("cont");
                 continue; // skip the rest of the loop
             }
             // Round robin
             while (!q1.isEmpty()) {
 
+                System.out.println("IN loop q1");
                 PCB process = q1.remove(0);
                 if (process.isNew()) {
                     process.setStartTime(time);
@@ -136,6 +139,7 @@ public class Driver {
                 }
 
                 else {
+                     addProcesses(time);
                     process.setTerminationTime(time);
                     process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
                     process.setWaitingTime(process.getTurnaroundTime() - process.getCpuBurst());
@@ -151,10 +155,12 @@ public class Driver {
                  * 
                  */
 
+                System.out.println("END loop q1");
             }
 
             // add q2 scheduling algorithm here
             while (!q2.isEmpty() && q1.isEmpty()) {
+                System.out.println("IN loop q2");
 
                 // Bubble sort on q2 based on burst time of previously sorted arival time
                 // processes ^ .
@@ -219,6 +225,7 @@ public class Driver {
                 // Calculate the turnaround time for the process
 
                 process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
+                System.out.println("END loop q2");
 
             }
             // time++;
