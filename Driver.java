@@ -5,14 +5,15 @@ import java.util.*;
 public class Driver {
     int Time = 0;
     static String order;
-    static List<PCB> q1 = new ArrayList<>();
-    static List<PCB> q2 = new ArrayList<>();
-    static List<PCB> allProcesses = new ArrayList<>();
-    static List<PCB> Processes = new ArrayList<>();
+    static List<PCB> q1;
+    static List<PCB> q2 ;
+    static List<PCB> allProcesses;
+    static List<PCB> Processes;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         boolean exit = false;
+    
 
         while (!exit) {
 
@@ -25,6 +26,11 @@ public class Driver {
 
             switch (choice) {
                 case 1:
+                q1 = new ArrayList<>();
+                q2 = new ArrayList<>();
+                allProcesses = new ArrayList<>();
+                 Processes = new ArrayList<>();
+               
                     System.out.print("Enter the number of processes: ");
                     int num = input.nextInt();
 
@@ -47,6 +53,7 @@ public class Driver {
                     break;
 
                 case 2:
+                if(Processes !=null ){
                     System.out.println("Scheduling Order:");
                     System.out.println(order);
                     System.out.print("\n");
@@ -58,7 +65,9 @@ public class Driver {
                     System.out.printf("Average Turnaround Time: %.2f\n", calculateAvgTurnaround(Processes));
                     System.out.printf("Average Waiting Time: %.2f\n", calculateAvgWaiting(Processes));
                     System.out.printf("Average Response Time: %.2f\n", calculateAvgResponse(Processes));
-                    writeReportToFile(Processes);
+                    writeReportToFile(Processes);}
+                    else 
+                    System.out.println("No scheduling information to be printed");
                     break;
                 case 3:
                     exit = true;
