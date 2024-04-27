@@ -134,9 +134,12 @@ public class Driver {
                 if (i == 3 && (process.getBurstTime() != 0)) {
                     q1.add(process);
                 }
-                process.setTerminationTime(time);
-                process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
-                process.setWaitingTime(process.getTurnaroundTime() - process.getBurstTime());
+
+                else {
+                    process.setTerminationTime(time);
+                    process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
+                    process.setWaitingTime(process.getTurnaroundTime() - process.getCpuBurst());
+                }
                 /*
                  * we can add and else here to caluclate turn around time( the process is
                  * complete )
@@ -211,7 +214,7 @@ public class Driver {
                 process.setBurstTime(burstTime);
 
                 process.setWaitingTime(
-                        process.getTerminationTime() - process.getArrivalTime() - process.getBurstTime());
+                        process.getTerminationTime() - process.getArrivalTime() - process.getCpuBurst());
 
                 // Calculate the turnaround time for the process
 

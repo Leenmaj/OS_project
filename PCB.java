@@ -2,6 +2,8 @@ public class PCB implements Comparable<PCB> {
     private String processId;
     private int priority;
     private int arrivalTime;
+    private int cpuBurst;
+
     private int burstTime;
     private int startTime;
     private int terminationTime;
@@ -14,6 +16,7 @@ public class PCB implements Comparable<PCB> {
         this.processId = processId;
         this.priority = priority;
         this.arrivalTime = arrivalTime;
+        this.cpuBurst = burstTime;
         this.burstTime = burstTime;
 
         this.startTime = -1;
@@ -107,7 +110,7 @@ public class PCB implements Comparable<PCB> {
         return "Process ID:" + processId + "\n" +
                 "Priority:" + priority + "\n" +
                 "Arrival Time:" + arrivalTime + "\n" +
-                "CPU burst:" + burstTime + "\n" +
+                "CPU burst:" + cpuBurst + "\n" +
                 "Start Time:" + startTime + "\n" +
                 "Termination Time:" + terminationTime + "\n" +
                 "Turnaround Time:" + turnaroundTime + "\n" +
@@ -122,6 +125,14 @@ public class PCB implements Comparable<PCB> {
 
     public void setNew(boolean isNew) {
         this.isNew = isNew;
+    }
+
+    public int getCpuBurst() {
+        return cpuBurst;
+    }
+
+    public void setCpuBurst(int cpuBurst) {
+        this.cpuBurst = cpuBurst;
     }
 
 }
