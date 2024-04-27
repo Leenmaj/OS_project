@@ -74,21 +74,16 @@ public class Driver {
 
     static boolean addProcesses(int time) {
         boolean processAdded = false;
-        for (int i = 0; i < allProcesses.size(); i++) {
-            if (allProcesses.get(0).getArrivalTime() == time) {
-                processAdded = true;
-                if (allProcesses.get(0).getPriority() == 1)
-                    q1.add(allProcesses.remove(0));
-
-                else
-                    q2.add(allProcesses.remove(0));
-
-            }
+        while (!allProcesses.isEmpty() && allProcesses.get(0).getArrivalTime() == time) {
+            processAdded = true;
+            if (allProcesses.get(0).getPriority() == 1)
+                q1.add(allProcesses.remove(0));
 
             else
-                break;
+                q2.add(allProcesses.remove(0));
 
         }
+
         return processAdded;
 
     }
@@ -106,13 +101,11 @@ public class Driver {
             if (!added && q1.isEmpty() && q2.isEmpty()) {
 
                 time++; // time increments when no processes can be scheduled
-                System.out.println("cont");
+
                 continue; // skip the rest of the loop
             }
             // Round robin
             while (!q1.isEmpty()) {
-
-                System.out.println("IN loop q1");
                 PCB process = q1.remove(0);
                 if (process.isNew()) {
                     process.setStartTime(time);
@@ -131,7 +124,12 @@ public class Driver {
                 for (i = 0; i < 3 && i < burstTime; i++) {
                     time++;
                     process.setBurstTime(process.getBurstTime() - 1);
-                    addProcesses(time);
+                    System.out.println(" i = " + i);
+                    boolean addedINRR = addProcesses(time);
+                    System.out.println("is added" + addedINRR);
+                    System.out.println(" q1 empty: " + q1.isEmpty());
+                    System.out.println(" q2 empty: " + q2.isEmpty());
+
                 }
                 // add non completed processes to the queue again
                 if (i == 3 && (process.getBurstTime() != 0)) {
@@ -139,28 +137,16 @@ public class Driver {
                 }
 
                 else {
-                     addProcesses(time);
+                    // addProcesses(time);
                     process.setTerminationTime(time);
                     process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
                     process.setWaitingTime(process.getTurnaroundTime() - process.getCpuBurst());
                 }
-                /*
-                 * we can add and else here to caluclate turn around time( the process is
-                 * complete )
-                 * 
-                 * else {
-                 * 
-                 * write in here the turn around time and wating time calculations
-                 * }
-                 * 
-                 */
 
-                System.out.println("END loop q1");
             }
 
             // add q2 scheduling algorithm here
             while (!q2.isEmpty() && q1.isEmpty()) {
-                System.out.println("IN loop q2");
 
                 // Bubble sort on q2 based on burst time of previously sorted arival time
                 // processes ^ .
@@ -225,7 +211,6 @@ public class Driver {
                 // Calculate the turnaround time for the process
 
                 process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
-                System.out.println("END loop q2");
 
             }
             // time++;
