@@ -124,11 +124,7 @@ public class Driver {
                 for (i = 0; i < 3 && i < burstTime; i++) {
                     time++;
                     process.setBurstTime(process.getBurstTime() - 1);
-                    System.out.println(" i = " + i);
-                    boolean addedINRR = addProcesses(time);
-                    System.out.println("is added" + addedINRR);
-                    System.out.println(" q1 empty: " + q1.isEmpty());
-                    System.out.println(" q2 empty: " + q2.isEmpty());
+                    addProcesses(time);
 
                 }
                 // add non completed processes to the queue again
@@ -145,7 +141,6 @@ public class Driver {
 
             }
 
-            // add q2 scheduling algorithm here
             while (!q2.isEmpty() && q1.isEmpty()) {
 
                 // Bubble sort on q2 based on burst time of previously sorted arival time
@@ -213,7 +208,6 @@ public class Driver {
                 process.setTurnaroundTime(process.getTerminationTime() - process.getArrivalTime());
 
             }
-            // time++;
 
         }
 
